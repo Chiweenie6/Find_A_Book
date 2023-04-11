@@ -55,11 +55,11 @@ const resolvers = {
     throw new AuthenticationError("🚫 Must Be Logged In To Save Book 🚫");
     },
     // Delete Book from the User's profile
-    deleteBookFromUser: async (parent, {book}, context) => {
+    deleteBookFromUser: async (parent, {bookId}, context) => {
         if (context.user) {
             return User.findOneAndUpdate(
                 {_id: context.user._id},
-                {$pull: {savedBooks: book}},
+                {$pull: {savedBooks: {bookId: bookId}}},
                 {new: true}
             );
         }
