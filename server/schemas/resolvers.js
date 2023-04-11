@@ -19,7 +19,7 @@ const resolvers = {
 
   Mutation: {
     // Create New User
-    addUser: async (parent, { username, email, password }) => {
+    createUser: async (parent, { username, email, password }) => {
       const user = await User.create({ username, email, password });
       const token = signToken(user);
 
@@ -32,7 +32,7 @@ const resolvers = {
       if (!user) {
         throw new AuthenticationError("🚫 User Email Not Found 🚫");
       }
-    // "isCorrectPassword" from User.js Model to compare and validate password
+      // "isCorrectPassword" from User.js Model to compare and validate password
       const pWord = await user.isCorrectPassword(password);
 
       if (!pWord) {
@@ -42,5 +42,31 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
+    // Save Book to User profile
+    saveBookToUser: async (parent, { userId, book }, context) => {
+      if (context.user) {
+        return User.findOneAndUpdate(
+          { _id: userId },
+          { $addToSet: { savedBooks: book } },
+          { new: true, runValidators: true }
+        );
+      }
+    //   Must be logged in in order to save book to profile
+    throw new AuthenticationError("🚫 Must Be Logged In To Save Book 🚫");
+    },
+    // Delete Book from the User's profile
+    deleteBookFromUser: async (parent, {book}, context) => {
+        if (context.user) {
+            return User.findOneAndUpdate(
+                {_id: context.user._id},
+                {$pull: {savedBooks: book}},
+                {new: true}
+            );
+        }
+        //   Must be logged in in order to delete book from profile
+        throw new AuthenticationError("🚫 Must Be Logged In To Delete Book 🚫");
+    }
   },
 };
+
+module.exports = resolvers;
