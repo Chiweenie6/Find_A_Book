@@ -4,10 +4,6 @@ const { signToken } = require("../utils/auth");
 
 const resolvers = {
   Query: {
-    // Get a single User
-    user: async (parent, { userId }) => {
-      return User.findOne({ _id: userId });
-    },
     // Can find logged in User without specifically searching for their id by adding context
     me: async (parent, args, context) => {
       if (context.user) {
