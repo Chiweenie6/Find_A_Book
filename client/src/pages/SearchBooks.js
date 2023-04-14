@@ -10,7 +10,6 @@ import {
 } from "react-bootstrap";
 
 import Auth from "../utils/auth";
-import { searchGoogleBooks } from "../utils/API";
 import { saveBookIds, getSavedBookIds } from "../utils/localStorage";
 
 // Import SAVE_BOOK mutation
@@ -41,10 +40,10 @@ const SearchBooks = () => {
     }
 
     try {
-      const response = await searchGoogleBooks(searchInput);
+      const response = await fetch (`https://www.googleapis.com/books/v1/volumes?q=${searchInput}`);
 
       if (!response.ok) {
-        throw new Error("something went wrong!");
+        throw new Error("🚫 Something went wrong! 🚫");
       }
 
       const { items } = await response.json();

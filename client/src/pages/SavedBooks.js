@@ -20,48 +20,10 @@ const SavedBooks = () => {
   const { loading, data } = useQuery(GET_ME, {
     variables: { profileId: profileId },
   });
-  // Checks if data is returning from "GET_ME"
-  const userData = data?.me || {};
-
-  if (Auth.loggedIn() && Auth.getProfile().data._id === profileId) {
-    return <Navigate to="/me" />;
-  }
-  if (loading) {
-    return <div>🔃 Loading 🔃</div>;
-  }
-  if (!userData?.username) {
-    return <h2>🚫 Must Be Logged In To View Profile🚫</h2>;
-  }
+  // Checks if data is returning from "GET_ME" and saves to "userData"
+  let userData = data?.me || {};
 
   const [removeBook] = useMutation(REMOVE_BOOK);
-
-  // use this to determine if `useEffect()` hook needs to run again
-  // const userDataLength = Object.keys(userData).length;
-
-  // useEffect(() => {
-  //   const getUserData = async () => {
-  //     try {
-  //       const token = Auth.loggedIn() ? Auth.getToken() : null;
-
-  //       if (!token) {
-  //         return false;
-  //       }
-
-  //       const response = await getMe(token);
-
-  //       if (!response.ok) {
-  //         throw new Error("something went wrong!");
-  //       }
-
-  //       const user = await response.json();
-  //       setUserData(user);
-  //     } catch (err) {
-  //       console.error(err);
-  //     }
-  //   };
-
-  //   getUserData();
-  // }, [userDataLength]);
 
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {
@@ -72,14 +34,19 @@ const SavedBooks = () => {
     }
 
     try {
-      const response = await deleteBook(bookId, token);
+      const { newData } = await removeBook({
+        variables: {
+          bookId: bookId,
+        },
+      });
 
-      if (!response.ok) {
-        throw new Error("something went wrong!");
+      if (!newData.ok) {
+        throw new Error("🚫 Something went wrong! 🚫");
       }
 
-      const updatedUser = await response.json();
-      setUserData(updatedUser);
+      // Update user's savedBooks after removing book.
+      userData = newData;
+
       // upon success, remove book's id from localStorage
       removeBookId(bookId);
     } catch (err) {
@@ -87,9 +54,14 @@ const SavedBooks = () => {
     }
   };
 
-  // if data isn't here yet, say so
-  if (!userDataLength) {
-    return <h2>LOADING...</h2>;
+  if (Auth.loggedIn() && Auth.getProfile().data._id === profileId) {
+    return <Navigate to="/me" />;
+  }
+  if (loading) {
+    return <div>🔃 Loading 🔃</div>;
+  }
+  if (!userData?.username) {
+    return <h2>🚫 Must Be Logged In To View Profile🚫</h2>;
   }
 
   return (
