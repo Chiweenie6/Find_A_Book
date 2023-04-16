@@ -64,7 +64,7 @@ const SignupForm = () => {
       {/* This is needed for the validation functionality above */}
       {data ? (
         <p>
-          Success! You may now head <Link to="/">back to the homepage.</Link>
+          🥳 Success! You may now head <Link to="/">back to the homepage.</Link>
         </p>
       ) : (
         <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
@@ -75,7 +75,7 @@ const SignupForm = () => {
             show={showAlert}
             variant="danger"
           >
-            Something went wrong with your signup!
+            🚫 Something went wrong with your signup! 🚫
           </Alert>
 
           <Form.Group>

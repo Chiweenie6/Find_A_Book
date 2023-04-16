@@ -58,7 +58,7 @@ const LoginForm = () => {
     <>
       {data ? (
         <p>
-          Success! You may now head <Link to="/">back to the homepage.</Link>
+          🥳 Success! You may now head <Link to="/">back to the homepage.</Link>
         </p>
       ) : (
         <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
@@ -68,7 +68,7 @@ const LoginForm = () => {
             show={showAlert}
             variant="danger"
           >
-            Something went wrong with your login credentials!
+            🚫 Something went wrong with your login credentials! 🚫
           </Alert>
           <Form.Group>
             <Form.Label htmlFor="email">Email</Form.Label>
