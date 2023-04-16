@@ -1,7 +1,7 @@
 const express = require("express");
 const path = require("path");
 const db = require("./config/connection");
-const routes = require("./routes");
+// const routes = require("./routes");
 
 // Adding Apollo Server
 const { ApolloServer } = require("apollo-server-express");
@@ -31,7 +31,7 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
 
-app.use(routes);
+// app.use(routes);
 
 // New instance of an Apollo server created with the GraphQL schema
 const startApolloServer = async (typeDefs, resolvers) => {
