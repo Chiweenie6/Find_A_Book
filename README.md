@@ -21,7 +21,13 @@ An application created using MERN stack. A React front end , Express.js and Node
 ## Usage  
 To allow a user to search for book titles. The user can view book information including title, author, image, a description of the book and a link to Google Books. Books can be saved for later on the user's profile, allowing the user to keep a list of books they like. A book can also be removed from the user's profile as well.
   
-  Images:  
+  Images:  ![image](https://user-images.githubusercontent.com/113393706/232629618-47204413-f1af-4f4c-8251-dc77c26df4fc.png)  
+  
+  ![image](https://user-images.githubusercontent.com/113393706/232629793-e9a068bd-234e-4cfb-a245-4b12788a9fb1.png)  
+  
+  ![image](https://user-images.githubusercontent.com/113393706/232630005-2e1774b4-6609-433b-881f-4ba396f56492.png)
+  
+  ![image](https://user-images.githubusercontent.com/113393706/232630154-d1a48c1f-ac82-4f66-a8cc-a23b599241d2.png)
 
 
 
