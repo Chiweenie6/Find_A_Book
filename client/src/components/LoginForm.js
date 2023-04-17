@@ -1,8 +1,6 @@
 // see SignupForm.js for comments
 import React, { useState } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
-import { Link } from "react-router-dom";
-
 import Auth from "../utils/auth";
 
 // import "LOGIN_USER" mutation
@@ -15,7 +13,7 @@ const LoginForm = () => {
   const [showAlert, setShowAlert] = useState(false);
 
   // Declared loginUser using "LOGIN_USER mutation"
-  const [loginUser, { error, data }] = useMutation(LOGIN_USER);
+  const [loginUser, { error}] = useMutation(LOGIN_USER);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -41,9 +39,9 @@ const LoginForm = () => {
         throw new Error("🚫 something went wrong! 🚫");
       }
 
-      Auth.login(response.loginUser.token);
-    } catch (err) {
-      console.error(err);
+      Auth.login(response.login.token);
+    } catch (error) {
+      console.error(error);
       setShowAlert(true);
     }
 
