@@ -16,11 +16,8 @@ import Auth from "../utils/auth";
 import { removeBookId } from "../utils/localStorage";
 
 const SavedBooks = () => {
-  const { profileId } = useParams();
   // Use the Query "GET_ME"
-  const { loading, data } = useQuery(GET_ME, {
-    variables: { profileId: profileId },
-  });
+  const { loading, data } = useQuery(GET_ME);
   // Checks if data is returning from "GET_ME" and saves to "userData"
   let userData = data?.me || {};
 
@@ -55,9 +52,7 @@ const SavedBooks = () => {
     }
   };
 
-  if (Auth.loggedIn() && Auth.getProfile().data._id === profileId) {
-    return <Navigate to="/me" />;
-  }
+  
   if (loading) {
     return <div>🔃 Loading 🔃</div>;
   }

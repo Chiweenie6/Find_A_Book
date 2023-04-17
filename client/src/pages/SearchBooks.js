@@ -30,6 +30,9 @@ const SearchBooks = () => {
     return () => saveBookIds(savedBookIds);
   });
 
+  // Use the "useMutation" Hook for mutation SAVE_BOOK
+  const [saveBook] = useMutation(SAVE_BOOK);
+
   // Method to search for books and set state on form submit
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -49,9 +52,6 @@ const SearchBooks = () => {
 
       const { items } = await response.json();
 
-      
-
-
       const bookData = items.map((book) => ({
         bookId: book.id,
         authors: book.volumeInfo.authors || ["No author to display"],
@@ -70,9 +70,6 @@ const SearchBooks = () => {
     }
   };
 
-  // Use the "useMutation" Hook for mutation SAVE_BOOK
-  const [saveBook, { error }] = useMutation(SAVE_BOOK);
-
   // Function to handle saving a book to our database
   const handleSaveBook = async (bookId) => {
     // find the book in `searchedBooks` state by the matching id
@@ -86,11 +83,11 @@ const SearchBooks = () => {
     }
 
     try {
-      const { response } = await saveBook({
+      const response = await saveBook({
         variables: { input: bookToSave },
       });
 
-      if (!response.ok) {
+      if (!response) {
         throw new Error("🚫 Something Went Wrong! 🚫");
       }
 
@@ -149,7 +146,9 @@ const SearchBooks = () => {
                   <Card.Title>{book.title}</Card.Title>
                   <p className="small">Authors: {book.authors}</p>
                   <Card.Text>{book.description}</Card.Text>
-                  <a href="https://books.google.com/books?id= + {book.bookId}.value">Link to Google Books</a>
+                  <a href="https://books.google.com/books?id= + {book.bookId}.value">
+                    Link to Google Books
+                  </a>
                   <br></br>
                   <br></br>
                   <br></br>
@@ -164,7 +163,7 @@ const SearchBooks = () => {
                       {savedBookIds?.some(
                         (savedBookId) => savedBookId === book.bookId
                       )
-                        ? "This book has already been saved! 🚫"
+                        ? "This book has already been saved! ✅"
                         : "Save this Book! 🎯"}
                     </Button>
                   )}
@@ -174,9 +173,6 @@ const SearchBooks = () => {
           })}
         </CardColumns>
       </Container>
-      {error && (
-        <div className="my-3 p-3 bg-danger text-white">{error.message}</div>
-      )}
     </>
   );
 };
