@@ -146,7 +146,7 @@ const SearchBooks = () => {
                   <Card.Title>{book.title}</Card.Title>
                   <p className="small">Authors: {book.authors}</p>
                   <Card.Text>{book.description}</Card.Text>
-                  <a href="https://books.google.com/books?id= + {book.bookId}.value">
+                  <a href={"https://books.google.com/books?id=" + `${book.bookId}`}>
                     Link to Google Books
                   </a>
                   <br></br>
