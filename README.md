@@ -27,7 +27,10 @@ To allow a user to search for book titles. The user can view book information in
   
   ![image](https://user-images.githubusercontent.com/113393706/232630005-2e1774b4-6609-433b-881f-4ba396f56492.png)
   
-  ![image](https://user-images.githubusercontent.com/113393706/232630154-d1a48c1f-ac82-4f66-a8cc-a23b599241d2.png)
+  ![image](https://user-images.githubusercontent.com/113393706/232630154-d1a48c1f-ac82-4f66-a8cc-a23b599241d2.png)  
+  
+  ![image](https://user-images.githubusercontent.com/113393706/232630722-414f9c0a-256e-4276-ad26-384301c8b8eb.png)
+
 
 
 
