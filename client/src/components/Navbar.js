@@ -14,25 +14,25 @@ const AppNavbar = () => {
     <>
       <Navbar bg="dark" variant="dark" expand="lg">
         <Container fluid>
-          <Navbar.Brand as={Link} to="/">
+          <Navbar.Brand as={Link} to="/" className="text-info">
             Google Books Search
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbar" />
           <Navbar.Collapse id="navbar">
             <Nav className="ml-auto">
-              <Nav.Link as={Link} to="/">
+              <Nav.Link className="text-info" as={Link} to="/">
                 Search For Books
               </Nav.Link>
               {/* if user is logged in show saved books and logout */}
               {Auth.loggedIn() ? (
                 <>
-                  <Nav.Link as={Link} to="/saved">
+                  <Nav.Link className="text-info" as={Link} to="/saved">
                     See Your Books
                   </Nav.Link>
-                  <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
+                  <Nav.Link className="text-danger" onClick={Auth.logout}>Logout</Nav.Link>
                 </>
               ) : (
-                <Nav.Link onClick={() => setShowModal(true)}>
+                <Nav.Link className="text-info" onClick={() => setShowModal(true)}>
                   Login/Sign Up
                 </Nav.Link>
               )}

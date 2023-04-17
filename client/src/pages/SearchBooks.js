@@ -100,9 +100,9 @@ const SearchBooks = () => {
 
   return (
     <>
-      <div fluid className="text-light bg-dark p-5">
+      <div fluid className="text-warning bg-secondary p-5">
         <Container>
-          <h1 class=" text-center">Search for Books! 📚</h1>
+          <h1 className=" text-center">📚 Find A Book! 📚</h1>
           <Form onSubmit={handleFormSubmit}>
             <Form.Row className="justify-content-center">
               <Col xs={12} md={8}>
@@ -112,12 +112,12 @@ const SearchBooks = () => {
                   onChange={(e) => setSearchInput(e.target.value)}
                   type="text"
                   size="lg"
-                  placeholder="Search for a book"
+                  placeholder="Enter book name"
                 />
               </Col>
               <Col xs={12} md={4}>
-                <Button type="submit" variant="success" size="lg">
-                  Submit Search
+                <Button type="submit" variant="success" size="lg" className="col-12">
+                  Find
                 </Button>
               </Col>
             </Form.Row>
@@ -126,10 +126,10 @@ const SearchBooks = () => {
       </div>
 
       <Container>
-        <h2 class="text-center">
+        <h2 className="text-center">
           {searchedBooks.length
-            ? `Viewing ${searchedBooks.length} results:`
-            : "Search for a book to begin"}
+            ? `${searchedBooks.length} results:`
+            : "Find A Book"}
         </h2>
         <CardColumns>
           {searchedBooks.map((book) => {
