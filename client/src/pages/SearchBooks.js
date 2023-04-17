@@ -39,7 +39,9 @@ const SearchBooks = () => {
     }
 
     try {
-      const response = await fetch (`https://www.googleapis.com/books/v1/volumes?q=${searchInput}`);
+      const response = await fetch(
+        `https://www.googleapis.com/books/v1/volumes?q=${searchInput}`
+      );
 
       if (!response.ok) {
         throw new Error("🚫 Something went wrong! 🚫");
@@ -47,13 +49,19 @@ const SearchBooks = () => {
 
       const { items } = await response.json();
 
+      
+
+
       const bookData = items.map((book) => ({
         bookId: book.id,
         authors: book.volumeInfo.authors || ["No author to display"],
         title: book.volumeInfo.title,
         description: book.volumeInfo.description,
-        image: book.volumeInfo.imageLinks?.thumbnail || "",
+        image: book.volumeInfo.imageLinks?.thumbnail || "📖",
+        link: book.volumeInfo.link,
       }));
+
+      console.log(bookData);
 
       setSearchedBooks(bookData);
       setSearchInput("");
@@ -97,9 +105,9 @@ const SearchBooks = () => {
     <>
       <div fluid className="text-light bg-dark p-5">
         <Container>
-          <h1>Search for Books! 📚</h1>
+          <h1 class=" text-center">Search for Books! 📚</h1>
           <Form onSubmit={handleFormSubmit}>
-            <Form.Row>
+            <Form.Row className="justify-content-center">
               <Col xs={12} md={8}>
                 <Form.Control
                   name="searchInput"
@@ -121,7 +129,7 @@ const SearchBooks = () => {
       </div>
 
       <Container>
-        <h2>
+        <h2 class="text-center">
           {searchedBooks.length
             ? `Viewing ${searchedBooks.length} results:`
             : "Search for a book to begin"}
@@ -141,6 +149,10 @@ const SearchBooks = () => {
                   <Card.Title>{book.title}</Card.Title>
                   <p className="small">Authors: {book.authors}</p>
                   <Card.Text>{book.description}</Card.Text>
+                  <a href="https://books.google.com/books?id= + {book.bookId}.value">Link to Google Books</a>
+                  <br></br>
+                  <br></br>
+                  <br></br>
                   {Auth.loggedIn() && (
                     <Button
                       disabled={savedBookIds?.some(
@@ -152,8 +164,8 @@ const SearchBooks = () => {
                       {savedBookIds?.some(
                         (savedBookId) => savedBookId === book.bookId
                       )
-                        ? "This book has already been saved!"
-                        : "Save this Book!"}
+                        ? "This book has already been saved! 🚫"
+                        : "Save this Book! 🎯"}
                     </Button>
                   )}
                 </Card.Body>
@@ -163,10 +175,8 @@ const SearchBooks = () => {
         </CardColumns>
       </Container>
       {error && (
-              <div className="my-3 p-3 bg-danger text-white">
-                {error.message}
-              </div>
-            )}
+        <div className="my-3 p-3 bg-danger text-white">{error.message}</div>
+      )}
     </>
   );
 };
