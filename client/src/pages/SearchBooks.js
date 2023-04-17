@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {
-  Jumbotron,
   Container,
   Col,
   Form,
@@ -14,7 +13,7 @@ import { saveBookIds, getSavedBookIds } from "../utils/localStorage";
 
 // Import SAVE_BOOK mutation
 import { SAVE_BOOK } from "../utils/mutations";
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/client";
 
 const SearchBooks = () => {
   // Create state for holding returned google api data
@@ -79,11 +78,11 @@ const SearchBooks = () => {
     }
 
     try {
-      const { data } = await saveBook({
+      const { response } = await saveBook({
         variables: { input: bookToSave },
       });
 
-      if (!data.ok) {
+      if (!response.ok) {
         throw new Error("🚫 Something Went Wrong! 🚫");
       }
 
@@ -96,7 +95,7 @@ const SearchBooks = () => {
 
   return (
     <>
-      <Jumbotron fluid className="text-light bg-dark">
+      <div fluid className="text-light bg-dark p-5">
         <Container>
           <h1>Search for Books! 📚</h1>
           <Form onSubmit={handleFormSubmit}>
@@ -119,7 +118,7 @@ const SearchBooks = () => {
             </Form.Row>
           </Form>
         </Container>
-      </Jumbotron>
+      </div>
 
       <Container>
         <h2>

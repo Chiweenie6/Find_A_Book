@@ -62,11 +62,6 @@ const SignupForm = () => {
   return (
     <>
       {/* This is needed for the validation functionality above */}
-      {data ? (
-        <p>
-          🥳 Success! You may now head <Link to="/">back to the homepage.</Link>
-        </p>
-      ) : (
         <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
           {/* show alert if server response is bad */}
           <Alert
@@ -136,7 +131,6 @@ const SignupForm = () => {
             Submit
           </Button>
         </Form>
-      )}
       {error && (
         <div className="my-3 p-3 bg-danger text-white">{error.message}</div>
       )}

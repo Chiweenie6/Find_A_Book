@@ -56,11 +56,6 @@ const LoginForm = () => {
 
   return (
     <>
-      {data ? (
-        <p>
-          🥳 Success! You may now head <Link to="/">back to the homepage.</Link>
-        </p>
-      ) : (
         <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
           <Alert
             dismissible
@@ -107,7 +102,6 @@ const LoginForm = () => {
             Submit
           </Button>
         </Form>
-      )}
       {error && (
         <div className="my-3 p-3 bg-danger text-white">{error.message}</div>
       )}
