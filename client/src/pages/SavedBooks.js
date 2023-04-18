@@ -68,7 +68,7 @@ const SavedBooks = () => {
         class="text-center p-5 text-success"
       >
         <Container class="">
-          <h1>📔📗 Viewing saved books! 📕📘</h1>
+          <h1>📔📗 Saved books! 📕📘</h1>
         </Container>
       </div>
       <Container>
