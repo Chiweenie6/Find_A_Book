@@ -11,6 +11,8 @@ const { authMiddleware } = require("./utils/auth");
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+app.set("port", PORT)
+
 // Using Apollo Servernpm run build
 const server = new ApolloServer({
   typeDefs,
