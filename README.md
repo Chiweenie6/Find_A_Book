@@ -35,7 +35,7 @@ To allow a user to search for book titles. The user can view book information in
 
 
 ## Installation
-  n/a
+  Copy files into VS Code and type "npm i" into command line. Then "npm run build". And lastly, type "npm run develop" in CL and the app will run in your browser.
 
 ## Contributing
   n/a
