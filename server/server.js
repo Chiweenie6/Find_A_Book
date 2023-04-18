@@ -11,7 +11,6 @@ const { authMiddleware } = require("./utils/auth");
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-
 // Using Apollo Servernpm run build
 const server = new ApolloServer({
   typeDefs,
@@ -26,6 +25,10 @@ app.use(express.json());
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../client/build")));
 }
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build/index.html'));
+});
 
 // New instance of an Apollo server created with the GraphQL schema
 const startApolloServer = async (typeDefs, resolvers) => {
