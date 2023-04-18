@@ -2,9 +2,6 @@
   "name": "find_a_book",
   "version": "1.0.0",
   "description": "",
-  "engines": {
-    "node": "16.x"
-  },
   "main": "server/server.js",
   "scripts": {
     "start": "node server/server.js",
